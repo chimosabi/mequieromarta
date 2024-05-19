@@ -1,0 +1,38 @@
+#COPIAR ISO A USB
+sudo fdisk -l //PARA VER LA LETRA DE LA UNIDAD
+
+sudo dd bs=4M if=/home/jj/Descargas/ubuntu-unity-24.04-desktop-amd64.iso of=/dev/sdb status=progress oflag=sync
+
+
+
+# EDITAR GRUB
+sudo nano /etc/default/grub
+
+GRUB_TIMEOUT=10
+Lo siguiente que cambio es que me recuerde el último kernel que arranqué, para que mientras no seleccione otro arranque con el último. Esto lo hago cambiando estos dos valores:
+
+GRUB_DEFAULT=saved
+GRUB_SAVEDEFAULT="true"
+
+Por último guardamos el fichero y cerramos el editor NANO, y regeneramos nuestro grub con el siguiente comando:
+
+sudo grub-mkconfig -o /boot/grub/grub.cfg
+
+
+#EXTENSIONES MANUALES
+1 descomprimi en jj/local/share/gnome-shell/extensions
+2 abrir el .json con editor de texto y verificar que UUID sea igual que el nombre de la carpeta
+
+#REMOVER APLICACION Y DEPENDENCIAS
+sudo pacman -Rnsu "nombre de app"
+
+sudo pacman -Rcns <package>
+-R: remove
+-c: cascade (I always check what will get removed)
+-n: no save (when I remove something I really want it gone)
+-s: remove dependencies ( mostly for cleanup)
+
+If I see potential problems with -c
+sudo pacman -Runs <package>
+
+
